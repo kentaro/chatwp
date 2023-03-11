@@ -75,4 +75,4 @@ Answer:
 
 ## Author
 
-Kentaro Kuribayashi <kentarok@gmail.com>
+Kentaro Kuribayashi &lt;kentarok@gmail.com&gt;
