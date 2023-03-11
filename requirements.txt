@@ -1,0 +1,4 @@
+beautifulsoup4==4.11.1
+langchain
+llama_index
+requests==2.28.1
