@@ -13,7 +13,6 @@ Answer the question below based on the blog's content as if you were the author.
 Question: {question}
 
 Answer to the question in the same language as the question.
-Be sure to include the URL of the source in your response as possible.
 """
 llm_predictor = LLMPredictor(llm=OpenAI(temperature=0, max_tokens=1024))
 index = GPTSimpleVectorIndex.load_from_disk(
