@@ -30,7 +30,7 @@ It may take a long time that depends on how many articles your WordPress site ha
 Here's the result for my WordPress site which has 5,000+ articles.
 
 ```sh
-time python ./make_index.py
+time python chatwp.py --make-index
 INFO:root:> [build_index_from_documents] Total LLM token usage: 0 tokens
 INFO:root:> [build_index_from_documents] Total embedding token usage: 4752468 tokens
 
