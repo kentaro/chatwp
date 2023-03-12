@@ -8,7 +8,7 @@
 
 `ChatWP` supposes the environment variables below are set:
 
-- `OPEN_API_KEY`: Your API Key for Open AI
+- `OPENAI_API_KEY`: Your API Key for Open AI
 - `WORDPRESS_URL`: The URL of your WordPress installation
 - `WORDPRESS_USERNAME`: Your username of the WordPress site
 - `WORDPRESS_PASSWORD`: Application password for the Wordpress site (see  [How to Create an Application Password for WordPress](https://www.paidmembershipspro.com/create-application-password-wordpress/) for details)
