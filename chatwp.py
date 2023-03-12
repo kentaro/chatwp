@@ -15,7 +15,7 @@ from llama_index import GPTSimpleVectorIndex, download_loader
 from llama_index.langchain_helpers.chatgpt import ChatGPTLLMPredictor
 
 from llama_index import GPTSimpleVectorIndex, LLMPredictor
-from langchain import OpenAI
+from langchain.llms import OpenAI
 
 def run(make_index=False, verbose=False):
   if verbose:
