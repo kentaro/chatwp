@@ -4,7 +4,6 @@ import logging
 logging.basicConfig(level=logging.WARNING)
 
 from llama_index import GPTSimpleVectorIndex, LLMPredictor
-from llama_index.langchain_helpers.chatgpt import ChatGPTLLMPredictor
 from langchain import OpenAI
 
 prompt = """
