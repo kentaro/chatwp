@@ -22,7 +22,7 @@ pip install -r requirements.txt
 ### Make index
 
 ```shell
-python ./make_index.py
+python chatwp.py --make-index
 ```
 
 It may take a long time that depends on how many articles your WordPress site has.
@@ -40,12 +40,20 @@ Executed in   25.12 mins    fish           external
    sys time    9.29 secs    1.04 millis    9.29 secs
 ```
 
-It cost about $2.0 to make an index for the above.
+The size of index is shown below:
+
+```
+ls -lah data/wordpress.json
+-rw-r--r--  1 antipop  staff   393M Mar 12 02:00 data/wordpress.json
+```
+
+It cost about $2 to make the index above.
 
 ### Chat with your WordPress site
 
 ```shell
 python ./chatwp.py
+Loading index...
 Question:
 ```
 
@@ -55,6 +63,7 @@ These examples are based on [my blog](https://kentarokuribayashi.com/).
 
 ```
 python ./chatwp.py
+Loading index...
 Question: お名前はなんですか？
 Answer: 私の名前はケンタロウ・クリバヤシです。
 
