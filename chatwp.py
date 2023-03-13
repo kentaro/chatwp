@@ -17,16 +17,33 @@ from llama_index.langchain_helpers.chatgpt import ChatGPTLLMPredictor
 from llama_index import GPTSimpleVectorIndex, LLMPredictor
 from langchain.llms import OpenAI
 
-def run(make_index=False, verbose=False):
+prompt = """
+Answer the question below based on the blog's content as if you were the author.
+
+Question: {question}
+
+Answer to the question in the same language as the question.
+"""
+
+def run(make_index=False, query=False, verbose=False):
   if verbose:
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG, force=True)
   else:
-    logging.basicConfig(level=logging.WARNING)
+    logging.basicConfig(stream=sys.stdout, level=logging.WARNING, force=True)
 
   if make_index:
     do_make_index()
+  elif query != False:
+    do_query(query)
   else:
     do_chat()
+
+def load_index():
+  llm_predictor = LLMPredictor(llm=OpenAI(temperature=0, max_tokens=1024))
+  return GPTSimpleVectorIndex.load_from_disk(
+    "data/wordpress.json",
+    llm_predictor=llm_predictor,
+  )
 
 def do_make_index():
   WordpressReader = download_loader("WordpressReader")
@@ -37,22 +54,14 @@ def do_make_index():
   index = GPTSimpleVectorIndex(documents, llm_predictor=ChatGPTLLMPredictor())
   index.save_to_disk("data/wordpress.json")
 
+def do_query(query):
+  index = load_index()
+  output = index.query(prompt.format(question=query))
+  print(output)
+
 def do_chat():
-  prompt = """
-Answer the question below based on the blog's content as if you were the author.
-
-Question: {question}
-
-Answer to the question in the same language as the question.
-"""
-  llm_predictor = LLMPredictor(llm=OpenAI(temperature=0, max_tokens=1024))
-
   print("Loading index...")
-
-  index = GPTSimpleVectorIndex.load_from_disk(
-    "data/wordpress.json",
-    llm_predictor=llm_predictor,
-  )
+  index = load_index()
 
   print("Question: ", end="", flush=True)
   try:
