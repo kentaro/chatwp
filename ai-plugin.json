@@ -3,7 +3,7 @@
   "name_for_human": "ChatWP",
   "name_for_model": "ChatWP",
   "description_for_human": "Plugin for chatting with your WordPress installation.",
-  "description_for_model": "Send a query like: {\"query\":${query}}",
+  "description_for_model": "Plugin for chatting with your WordPress installation.",
   "auth": {
     "type": "none"
   },
