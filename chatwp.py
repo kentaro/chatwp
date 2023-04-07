@@ -25,7 +25,7 @@ Question: {question}
 Answer to the question in the same language as the question.
 """
 
-def run(make_index=False, query=False, verbose=False):
+def run(make_index=False, query=False, top_k=5, verbose=False):
   if verbose:
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG, force=True)
   else:
@@ -34,9 +34,9 @@ def run(make_index=False, query=False, verbose=False):
   if make_index:
     do_make_index()
   elif query != False:
-    do_query(query)
+    do_query(query, top_k)
   else:
-    do_chat()
+    do_chat(top_k)
 
 def load_index():
   llm_predictor = LLMPredictor(llm=OpenAI(temperature=0, max_tokens=1024))
@@ -54,19 +54,19 @@ def do_make_index():
   index = GPTSimpleVectorIndex(documents, llm_predictor=ChatGPTLLMPredictor())
   index.save_to_disk("data/wordpress.json")
 
-def do_query(query):
+def do_query(query, top_k):
   index = load_index()
-  output = index.query(prompt.format(question=query))
+  output = index.query(prompt.format(question=query), similarity_top_k=top_k)
   print(output)
 
-def do_chat():
+def do_chat(top_k):
   print("Loading index...")
   index = load_index()
 
   print("Question: ", end="", flush=True)
   try:
     while question := next(sys.stdin).strip():
-      output = index.query(prompt.format(question=question))
+      output = index.query(prompt.format(question=question), similarity_top_k=top_k)
       print("Answer: ", end="")
       print(output)
       print("")
