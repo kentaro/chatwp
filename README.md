@@ -57,7 +57,24 @@ Loading index...
 Question:
 ```
 
+### Chat via ChatGPT Plugins
+
+`api.py` works as a localhost plugin for ChatGPT.
+
+```shell
+python api.py
+ * Serving Flask app 'api'
+ * Debug mode: off
+INFO:werkzeug:WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:3333
+INFO:werkzeug:Press CTRL+C to quit
+```
+
+Install it into ChatGPT, then send some query on ChatGPT. See the example below for details.
+
 ## Examples
+
+### CLI
 
 These examples are based on [my blog](https://kentarokuribayashi.com/).
 
@@ -108,6 +125,12 @@ Answer: いまはまだ話せません。しかし、『NHKラジオまいにち
 Question: 外国語を学習するのは好きですか？
 Answer: はい、好きです。
 ```
+
+### ChatGPT Plugin
+
+![](images/screenshot1.png)
+
+![](images/screenshot2.png)
 
 ## Author
 

@@ -54,9 +54,13 @@ def do_make_index():
   index = GPTSimpleVectorIndex(documents, llm_predictor=ChatGPTLLMPredictor())
   index.save_to_disk("data/wordpress.json")
 
+def execute_query(index, query, top_k):
+  output = index.query(prompt.format(question=query), similarity_top_k=top_k)
+  return output
+
 def do_query(query, top_k):
   index = load_index()
-  output = index.query(prompt.format(question=query), similarity_top_k=top_k)
+  output = execute_query(index, prompt.format(question=query), top_k)
   print(output)
 
 def do_chat(top_k):
@@ -66,7 +70,7 @@ def do_chat(top_k):
   print("Question: ", end="", flush=True)
   try:
     while question := next(sys.stdin).strip():
-      output = index.query(prompt.format(question=question), similarity_top_k=top_k)
+      output = execute_query(index, prompt.format(question=question), top_k)
       print("Answer: ", end="")
       print(output)
       print("")

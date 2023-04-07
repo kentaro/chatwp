@@ -1,0 +1,43 @@
+openapi: 3.0.1
+info:
+  title: ChatWP Plugin
+  description: A Plugin for chatting with a WordPress installation.
+  version: 'v1'
+servers:
+  - url: http://localhost:3333
+paths:
+  /query:
+    post:
+      operationId: query
+      summary: Send a query to the WordPress.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/queryRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/queryResponse'
+components:
+  schemas:
+    queryRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          description: A query from a user
+      required:
+      - query
+    queryResponse:
+      type: object
+      properties:
+        answer:
+          type: string
+          description: The answer from the WordPress.
+      required:
+        - answer
